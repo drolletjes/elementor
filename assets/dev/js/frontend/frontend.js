@@ -15,6 +15,7 @@ import Events from 'elementor-utils/events';
 import Shapes from 'elementor/modules/shapes/assets/js/frontend/frontend';
 import Controls from './utils/controls';
 import AnchorScrollMargin from './utils/anchor-scroll-margin';
+import MotionEffects from './utils/motion-effects';
 
 import { escapeHTML } from 'elementor-frontend/utils/utils';
 
@@ -203,6 +204,7 @@ export default class Frontend extends elementorModules.ViewModule {
 			events: Events,
 			controls: new Controls(),
 			anchor_scroll_margin: new AnchorScrollMargin(),
+			motionEffects: new MotionEffects(),
 		};
 
 		// TODO: BC since 2.4.0
@@ -368,6 +370,8 @@ export default class Frontend extends elementorModules.ViewModule {
 		this.documentsManager = new DocumentsManager();
 
 		this.trigger( 'components:init' );
+
+		this.utils.motionEffects.init();
 
 		new LightboxManager();
 	}

@@ -1,0 +1,54 @@
+[data-e-motion] {
+	--e-motion-duration: .8s;
+	--e-motion-delay: 0s;
+	--e-motion-distance: 24px;
+	opacity: 0;
+	animation-duration: var( --e-motion-duration );
+	animation-delay: var( --e-motion-delay );
+	animation-fill-mode: both;
+	will-change: transform, opacity;
+}
+
+[data-e-motion="fade-up"] {
+	transform: translate3d( 0, var( --e-motion-distance ), 0 );
+}
+
+[data-e-motion="fade-right"] {
+	transform: translate3d( calc( var( --e-motion-distance ) * -1 ), 0, 0 );
+}
+
+[data-e-motion="zoom-in"] {
+	transform: scale( .9 );
+}
+
+[data-e-motion="float"] {
+	opacity: 1;
+	animation: e-motion-float 4s ease-in-out infinite;
+}
+
+[data-e-motion].e-motion--visible {
+	opacity: 1;
+	transform: translate3d( 0, 0, 0 ) scale( 1 );
+	transition: transform var( --e-motion-duration ) ease, opacity var( --e-motion-duration ) ease;
+	transition-delay: var( --e-motion-delay );
+}
+
+@keyframes e-motion-float {
+	0%,
+	100% {
+		transform: translate3d( 0, 0, 0 );
+	}
+
+	50% {
+		transform: translate3d( 0, -12px, 0 );
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-e-motion] {
+		opacity: 1;
+		transform: none;
+		animation: none;
+		transition: none;
+	}
+}
